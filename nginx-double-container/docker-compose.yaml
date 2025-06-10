@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  express-app:
+    build: ./exprems
+    # Don't expose ports - only accessible from nginx
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx-separate.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - express-app
+    networks:
+      - app-network
+    restart: unless-stopped
+
+networks:
+  app-network:
+    driver: bridge
