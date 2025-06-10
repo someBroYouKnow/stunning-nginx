@@ -1,3 +1,12 @@
-node_modules
+# Node modules
+node_modules/
+
+# Environment files
 .env
+
+# Dependency lock file
 package-lock.json
+
+# Log files (ignore in all directories)
+**/access.log
+**/error.log
